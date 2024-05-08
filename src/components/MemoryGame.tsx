@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import postToMyBestApi from "@/api/services/postToMyBestApi";
+import useFetchFromMyBest from "@/hooks/api-hook/useFetchFromMyBest";
+import useFetchFromGlobalBest from "@/hooks/api-hook/useFetchFromGlobalBest";
+import fetchFromMyBestApi from "@/api/services/fetchFromMyBestApi";
 
 const generateDeck = () => {
   const memoryCards = [
@@ -22,8 +26,9 @@ export default function MemoryGame() {
   const [flipped, setFlipped] = useState<number[]>([]);
   const [solved, setSolved] = useState<number[]>([]);
   const [clickCount, setClickCount] = useState<number>(0);
-  const my_best = 35;
-  const global_best = 16;
+  const { myBest } = useFetchFromMyBest();
+  const [myBestScore, setMyBestScore] = useState<number>();
+  const { globalBest } = useFetchFromGlobalBest();
 
   useEffect(() => {
     const checkForMatch = () => {
@@ -42,6 +47,10 @@ export default function MemoryGame() {
     }
   }, [cards, flipped, solved]);
 
+  useEffect(() => {
+    setMyBestScore(myBest[0]?.myBestScore);
+  }, [myBest]);
+
   const handleClick = (index: number) => {
     setClickCount(clickCount + 1);
     if (!flipped.includes(index) && flipped.length < 2)
@@ -49,6 +58,16 @@ export default function MemoryGame() {
   };
 
   const gameOver = solved.length === cards.length;
+
+  if (gameOver) {
+    if (clickCount !== 0 && clickCount < myBest[0]?.myBestScore) {
+      postToMyBestApi({
+        createdAt: Date.now(),
+        myBestScore: 26,
+        id: "1",
+      });
+    }
+  }
 
   const resetGame = () => {
     setCards(generateDeck());
@@ -58,7 +77,7 @@ export default function MemoryGame() {
   };
 
   return (
-    <div className="">
+    <div>
       <h1 className="text-center py-8 text-2xl text-white underline decoration-purple-300 decoration-2 font-bold">
         Memory Game
       </h1>
@@ -66,10 +85,10 @@ export default function MemoryGame() {
         Click Count: {clickCount}
       </div>
       <div className="bg-blue-300 rounded text-white text-center p-2 mb-4">
-        My Best Score: {my_best}
+        My Best Score: {myBestScore}
       </div>
       <div className="bg-blue-300 rounded text-white text-center p-2 mb-4">
-        Global Best Score: {global_best}
+        Global Best Score: {globalBest[0]?.globalBestScore}
       </div>
       <h2 className="p-4 text-slate-600 justify-center items-center flex mb-4">
         {gameOver ? "Congratulation! You Won!" : ""}
