@@ -52,9 +52,10 @@ export default function MemoryGame() {
   }, [myBest]);
 
   const handleClick = (index: number) => {
-    setClickCount(clickCount + 1);
-    if (!flipped.includes(index) && flipped.length < 2)
+    if (!flipped.includes(index) && flipped.length < 2) {
+      setClickCount(clickCount + 1);
       setFlipped([...flipped, index]);
+    }
   };
 
   const gameOver = solved.length === cards.length;

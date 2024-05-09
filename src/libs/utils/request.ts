@@ -6,7 +6,7 @@ const request = async <T>(
   url: string,
   config: AxiosRequestConfig
 ): Promise<T | undefined> => {
-  const { baseUrl, method, params, data, timeout, onDownloadProgress } = config;
+  const { baseUrl, method, params, data } = config;
   const instance = axios.create({
     baseURL: baseUrl,
     method,
