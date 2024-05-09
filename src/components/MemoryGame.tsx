@@ -60,20 +60,22 @@ export default function MemoryGame() {
   const gameOver = solved.length === cards.length;
 
   if (gameOver) {
-    if (clickCount !== 0 && clickCount < myBest[0]?.myBestScore) {
+    if (clickCount !== 0 && myBestScore && clickCount < myBestScore) {
       postToMyBestApi({
         createdAt: Date.now(),
-        myBestScore: 26,
+        myBestScore: clickCount,
         id: "1",
       });
+      setMyBestScore(clickCount);
     }
   }
 
-  const resetGame = () => {
+  const resetGame = async () => {
     setCards(generateDeck());
     setFlipped([]);
     setSolved([]);
     setClickCount(0);
+    await fetchFromMyBestApi();
   };
 
   return (
