@@ -110,7 +110,7 @@ export default function MemoryGame() {
             {flipped.includes(index) || solved.includes(index) ? (
               <Image
                 className="rotate-180 p-2"
-                src={`/memory-cards/${card}.png`}
+                src={`/images/${card}.png`}
                 alt="Memory Card"
                 width={100}
                 height={100}

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import MemoryGame from "../components/MemoryGame";
 
 export default function Home() {

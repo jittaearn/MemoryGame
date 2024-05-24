@@ -1,6 +1,6 @@
 ## Memory Game
 
-<img width={300} height="auto" src="./public/memory-game.png">
+<img width={300} height="auto" src="./public/images/memory-game.png">
 
 ## Game Description
 Memory Game is a simple card game which consisted of a total of 12 cards. It is made out of two set of 6 different types of fruits. The main goal of the game is to match the two identical cards. If you successfully match all identical card you win. Your best score and the global best score will be visible to you at all time. You can view the amount of click you have made for that round. You can always click restart to reset the game. 
