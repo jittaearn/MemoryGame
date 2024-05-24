@@ -7,6 +7,7 @@ import useFetchFromMyBest from "@/hooks/api-hook/useFetchFromMyBest";
 import useFetchFromGlobalBest from "@/hooks/api-hook/useFetchFromGlobalBest";
 import fetchFromMyBestApi from "@/api/services/fetchFromMyBestApi";
 import { Button } from "./commons/button";
+import { InfoBox } from "./commons/infoBox";
 
 const generateDeck = () => {
   const memoryCards = [
@@ -85,15 +86,9 @@ export default function MemoryGame() {
       <h1 className="text-center py-8 text-2xl text-white underline decoration-purple-300 decoration-2 font-bold">
         Memory Game
       </h1>
-      <div className="bg-blue-300 rounded text-white text-center p-2 mb-4">
-        Click Count: {clickCount}
-      </div>
-      <div className="bg-blue-300 rounded text-white text-center p-2 mb-4">
-        My Best Score: {myBestScore}
-      </div>
-      <div className="bg-blue-300 rounded text-white text-center p-2 mb-4">
-        Global Best Score: {globalBest[0]?.globalBestScore}
-      </div>
+      <InfoBox>Click Count: {clickCount}</InfoBox>
+      <InfoBox>My Best Score: {myBestScore}</InfoBox>
+      <InfoBox>Global Best Score: {globalBest[0]?.globalBestScore}</InfoBox>
       <h2 className="p-4 text-slate-600 justify-center items-center flex mb-4">
         {gameOver ? "Congratulation! You Won!" : ""}
       </h2>
