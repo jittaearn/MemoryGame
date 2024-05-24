@@ -6,6 +6,7 @@ import postToMyBestApi from "@/api/services/postToMyBestApi";
 import useFetchFromMyBest from "@/hooks/api-hook/useFetchFromMyBest";
 import useFetchFromGlobalBest from "@/hooks/api-hook/useFetchFromGlobalBest";
 import fetchFromMyBestApi from "@/api/services/fetchFromMyBestApi";
+import { Button } from "./commons/button";
 
 const generateDeck = () => {
   const memoryCards = [
@@ -121,12 +122,7 @@ export default function MemoryGame() {
           </div>
         ))}
       </div>
-      <button
-        onClick={() => resetGame()}
-        className="p-4 bg-purple-300 rounded-md text-white flex mt-5"
-      >
-        Restart
-      </button>
+      <Button onClick={() => resetGame()}>Restart</Button>
     </div>
   );
 }
